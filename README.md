@@ -58,6 +58,9 @@ Whether you're building a communication stack or validating data integrity in em
   ---
   This section provides detailed descriptions of the functions in the `err.h` and `err.c` files for implementing error detection mechanisms in embedded systems. The library includes simple additive checksums (8/16/32-bit) and flexible CRC calculations (CRC-8, CRC-16, CRC-32) with support for custom polynomials, initial values, reflection settings, and final XOR operations. These APIs are designed to ensure data integrity in communication protocols and memory validation routines, offering both lightweight and robust verification methods.
 
+- [CRC Reference](./CRC_Reference.md)
+  ---
+  This section summarizes standard CRC algorithms (CRC-8, CRC-16, CRC-32) used for error detection in embedded systems. It includes key parameters like polynomial, initial value, reflection, and XOR settings—compatible with the `err.h` library. These configurations help ensure data integrity in sensors, communication protocols, and file validation.
 
 > [!CAUTION]
 > This tutorial has not yet **started!**
