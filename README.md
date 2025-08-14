@@ -54,6 +54,11 @@ Whether you're building a communication stack or validating data integrity in em
 > The resources are detailed in the sections below.  
 > To access any of them, simply click on the corresponding blue link.
 
+- [API Reference](./API_Reference.md)
+  ---
+  This section provides detailed descriptions of the functions in the `err.h` and `err.c` files for implementing error detection mechanisms in embedded systems. The library includes simple additive checksums (8/16/32-bit) and flexible CRC calculations (CRC-8, CRC-16, CRC-32) with support for custom polynomials, initial values, reflection settings, and final XOR operations. These APIs are designed to ensure data integrity in communication protocols and memory validation routines, offering both lightweight and robust verification methods.
+
+
 > [!CAUTION]
 > This tutorial has not yet **started!**
 
