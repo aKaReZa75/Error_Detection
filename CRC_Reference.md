@@ -10,7 +10,7 @@ This document outlines commonly used CRC algorithms across 8-bit, 16-bit, and 32
 ### 🔹 CRC-8 Variants
 
 #### CRC-8/MAXIM
-- **Used In**: Maxim/Dallas 1-Wire devices (e.g., DS18B20 temperature & AHT20 sensor)
+- **Used In**: Maxim/Dallas 1-Wire devices (e.g., DS18B20 temperature sensor)
 - **Purpose**: Verifies short data packets in low-speed serial protocols
 - **Configuration**:
 ```c
@@ -20,6 +20,21 @@ hcrc8_T crc8_maxim =
   .Init = 0x00,
   .refIn = true,
   .refOut = true,
+  .xorOut = 0x00
+};
+```
+
+#### CRC-8/NRSC-5
+- **Used In**: AHT20 temperature and humidity sensor
+- **Purpose**: Validates sensor data integrity during I²C communication
+- **Configuration**:
+```c
+hcrc8_T crc8_aht20 = 
+{
+  .Poly = 0x31, // x⁸ + x⁵ + x⁴ + 1
+  .Init = 0xFF,
+  .refIn = false,
+  .refOut = false,
   .xorOut = 0x00
 };
 ```
