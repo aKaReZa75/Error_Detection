@@ -67,6 +67,8 @@ hcrc8_T crc8_sae_j1850 =
   .refOut = false,
   .xorOut = 0xFF
 };
+```
+
 ---
 
 ### 🔸 CRC-16 Variants
@@ -144,18 +146,46 @@ hcrc32_T crc32_castagnoli =
 - Always match CRC settings to the target protocol or device datasheet.
 - Use reflection and XOR settings carefully—they affect compatibility.
 
-## Reference Table
+> [!IMPORTANT]
+> All configurations assume little-endian byte order. For big-endian systems, additional byte swapping may be required.
 
-| Standard       | Polynomial | Initial Value | RefIn | RefOut | XorOut | Applications         |
-|----------------|------------|---------------|-------|--------|--------|----------------------|
-| CRC-8/MAXIM    | 0x31       | 0x00          | true  | true   | 0x00   | 1-Wire, AHT20       |
-| CRC-16/MODBUS  | 0x8005     | 0xFFFF        | true  | true   | 0x0000 | MODBUS RTU          |
-| CRC-16/CCITT   | 0x1021     | 0x0000        | false | false  | 0x0000 | XMODEM, Bluetooth   |
-| CRC-32         | 0x04C11DB7 | 0xFFFFFFFF    | true  | true   | 0xFFFFFFFF | Ethernet, ZIP     |
-| CRC-32C        | 0x1EDC6F41 | 0xFFFFFFFF    | true  | true   | 0xFFFFFFFF | SCTP, ext4       |
+## 📑 Reference Table
+
+| Standard                 | Polynomial | Init Value | RefIn | RefOut | XorOut     | Typical Applications            |
+| ------------------------ | ---------- | ---------- | ----- | ------ | ---------- | ------------------------------- |
+| **CRC-8/MAXIM**          | 0x31       | 0x00       | true  | true   | 0x00       | Maxim/Dallas 1-Wire (DS18B20)   |
+| **CRC-8/NRSC-5**         | 0x31       | 0xFF       | false | false  | 0x00       | AHT20 temperature/humidity      |
+| **CRC-8/ATM**            | 0x07       | 0x00       | false | false  | 0x00       | ATM networks, lightweight proto |
+| **CRC-8/SAE-J1850**      | 0x1D       | 0xFF       | false | false  | 0xFF       | Automotive (SAE J1850 frames)   |
+| **CRC-16/MODBUS**        | 0x8005     | 0xFFFF     | true  | true   | 0x0000     | MODBUS RTU industrial control   |
+| **CRC-16/CCITT-FALSE**   | 0x1021     | 0xFFFF     | false | false  | 0x0000     | X.25, HDLC, Bluetooth           |
+| **CRC-32 (Ethernet)**    | 0x04C11DB7 | 0xFFFFFFFF | true  | true   | 0xFFFFFFFF | Ethernet, ZIP, PNG, file checks |
+| **CRC-32C (Castagnoli)** | 0x1EDC6F41 | 0xFFFFFFFF | true  | true   | 0xFFFFFFFF | iSCSI, SATA, Btrfs, storage sys |
+
 
 > [!NOTE]
-> All configurations assume little-endian byte order. For big-endian systems, additional byte swapping may be required.
+> **Residue in CRC Algorithms**
+>
+> The **Residue** is the expected remainder when a CRC calculation is applied to the entire data block **including its CRC checksum**.
+>
+> * In many CRC definitions, the Residue is defined to be **0**. This is called the **zero-check property**, because when the receiver re-calculates the CRC over `(Message + CRC)`, the result will be zero—indicating that the message is valid and error-free.
+>
+> * However, not all CRC algorithms use zero as their Residue. Some standards define a **non-zero constant Residue** instead. For example:
+>
+>   * **CRC-32 (Ethernet)** has a Residue of `0xDEBB20E3`.
+>   * **CRC-16/CCITT-FALSE** has a Residue of `0x1D0F`.
+>
+> * This behavior depends on the **Init value**, **XorOut**, and reflection settings (`refIn`, `refOut`). These parameters affect whether the Residue ends up being `0` or some other fixed constant.
+>
+> * The Residue is very important when validating an implementation:
+>
+>   1. If your computed CRC appended to the data produces the defined Residue, your CRC function is correct.
+>   2. If you always expect `0` but the algorithm defines a different Residue, your validation test will fail.
+
+✅ In short:
+ * **Residue = 0** → zero-check property (common in lightweight CRCs like CRC-8/MAXIM or CRC-16/MODBUS).
+ * **Residue = constant (≠ 0)** → defined by standard, must be checked against that value (common in telecom and file integrity CRCs).
+
 
 
 # 🌟 Support Me
