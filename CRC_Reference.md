@@ -54,6 +54,19 @@ hcrc8_T crc8_atm =
 };
 ```
 
+#### CRC-8/SAE-J1850
+* **Used In**: Automotive protocols (e.g., SAE J1850, CAN-related checks)
+* **Purpose**: Ensures integrity of automotive communication frames
+* **Configuration**:
+```c
+hcrc8_T crc8_sae_j1850 = 
+{
+  .Poly   = 0x1D, // x⁸ + x⁴ + x³ + x² + 1
+  .Init   = 0xFF,
+  .refIn  = false,
+  .refOut = false,
+  .xorOut = 0xFF
+};
 ---
 
 ### 🔸 CRC-16 Variants
