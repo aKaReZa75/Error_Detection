@@ -69,6 +69,21 @@ hcrc8_T crc8_sae_j1850 =
 };
 ```
 
+#### CRC-8/AUTOSAR
+* **Used In**: AUTOSAR automotive standard (E2E protection)
+* **Purpose**: End-to-end communication protection in automotive ECUs
+* **Configuration**:
+```c
+hcrc8_T crc8_autosar = 
+{
+  .Poly   = 0x2F, // x⁸ + x⁵ + x³ + x² + x + 1
+  .Init   = 0xFF,
+  .refIn  = false,
+  .refOut = false,
+  .xorOut = 0xFF
+};
+```
+
 ---
 
 ### 🔸 CRC-16 Variants
@@ -137,6 +152,21 @@ hcrc32_T crc32_castagnoli =
 };
 ```
 
+#### CRC-32/AUTOSAR
+- **Used In**: AUTOSAR automotive standard (E2E protection, 32-bit variant)
+- **Purpose**: Enhanced integrity protection for safety-critical automotive applications
+- **Configuration**:
+```c
+hcrc32_T crc32_autosar = 
+{
+  .Poly = 0xF4ACFB13, // AUTOSAR polynomial
+  .Init = 0xFFFFFFFF,
+  .refIn = true,
+  .refOut = true,
+  .xorOut = 0xFFFFFFFF
+};
+```
+
 ---
 
 ### 📌 Notes
@@ -157,10 +187,12 @@ hcrc32_T crc32_castagnoli =
 | **CRC-8/NRSC-5**         | 0x31       | 0xFF       | false | false  | 0x00       | AHT20 temperature/humidity      |
 | **CRC-8/ATM**            | 0x07       | 0x00       | false | false  | 0x00       | ATM networks, lightweight proto |
 | **CRC-8/SAE-J1850**      | 0x1D       | 0xFF       | false | false  | 0xFF       | Automotive (SAE J1850 frames)   |
+| **CRC-8/AUTOSAR**        | 0x2F       | 0xFF       | false | false  | 0xFF       | AUTOSAR E2E automotive ECUs     |
 | **CRC-16/MODBUS**        | 0x8005     | 0xFFFF     | true  | true   | 0x0000     | MODBUS RTU industrial control   |
 | **CRC-16/CCITT-FALSE**   | 0x1021     | 0xFFFF     | false | false  | 0x0000     | X.25, HDLC, Bluetooth           |
 | **CRC-32 (Ethernet)**    | 0x04C11DB7 | 0xFFFFFFFF | true  | true   | 0xFFFFFFFF | Ethernet, ZIP, PNG, file checks |
 | **CRC-32C (Castagnoli)** | 0x1EDC6F41 | 0xFFFFFFFF | true  | true   | 0xFFFFFFFF | iSCSI, SATA, Btrfs, storage sys |
+| **CRC-32/AUTOSAR**       | 0xF4ACFB13 | 0xFFFFFFFF | true  | true   | 0xFFFFFFFF | AUTOSAR E2E safety-critical sys |
 
 
 > [!NOTE]
@@ -185,8 +217,6 @@ hcrc32_T crc32_castagnoli =
 ✅ In short:
  * **Residue = 0** → zero-check property (common in lightweight CRCs like CRC-8/MAXIM or CRC-16/MODBUS).
  * **Residue = constant (≠ 0)** → defined by standard, must be checked against that value (common in telecom and file integrity CRCs).
-
-
 
 # 🌟 Support Me
 If you found this repository useful:
