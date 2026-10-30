@@ -1,4 +1,4 @@
-# Error Detection Algorithms for Embedded Communication Protocols
+# Error Detection Algorithms for Embedded System
 This repository offers a collection of robust and efficient error detection algorithms tailored for embedded systems. It includes implementations of:
 - ✅ **Checksums**: 8-bit, 16-bit, and 32-bit  
 - ✅ **Cyclic Redundancy Checks (CRC)**: 8-bit, 16-bit, and 32-bit  
@@ -6,11 +6,11 @@ This repository offers a collection of robust and efficient error detection algo
 These algorithms are written in pure C for maximum portability and can be integrated into projects running on AVR, STM32, or any other microcontroller platform. The code is optimized for use in serial communication protocols, data integrity checks, and fault-tolerant systems.
 
 Key highlights:
-- 📦 Modular and reusable C functions  
-- 🔧 Easy integration into existing firmware  
-- 🧪 Tested across multiple platforms and use cases  
-- 📚 Includes examples and documentation for each algorithm  
-- 🛠️ Suitable for UART, SPI, I2C, CAN, and custom protocols  
+- Modular and reusable C functions  
+- Easy integration into existing firmware  
+- Tested across multiple platforms and use cases  
+- Includes examples and documentation for each algorithm  
+- Suitable for UART, SPI, I2C, CAN, and custom protocols  
 
 Whether you're building a communication stack or validating data integrity in embedded applications, this repository provides essential tools for reliable error detection.
 
@@ -82,8 +82,38 @@ Whether you're building a communication stack or validating data integrity in em
   ---
   This section summarizes standard CRC algorithms (CRC-8, CRC-16, CRC-32) used for error detection in embedded systems. It includes key parameters like polynomial, initial value, reflection, and XOR settings—compatible with the `err.h` library. These configurations help ensure data integrity in sensors, communication protocols, and file validation.
 
-> [!CAUTION]
-> This tutorial has not yet **started!**
+```plaintext
+📁 Error Detection
+   └── [aKaReZa 146 - Microcontroller, Error Detection - PART A]
+         ├─ Data Corruption — Causes of data errors during transmission and storage.
+         ├─ Importance of Error Detection — Why data integrity matters in embedded systems and microcontrollers.
+         ├─ Parity Bit — Basic error-detection technique and its usage.
+         ├─ Checksum — Method for data verification and its applications.
+         ├─ Checksum vs Parity Bit — Comparing effectiveness of the two techniques.
+         ├─ CRC (Cyclic Redundancy Check) — Introduction to CRC for robust error detection.
+         ├─ Technique Comparison — Advantages, limitations, and use cases of each method.
+         └─ Reliability Improvement — Methods to enhance reliability in data transmission and processing.
+```
+
+<table>
+  <tr>
+    <td valign="top" style="padding: 0 10px;">
+      <h3 style="margin: 0;">
+        <a href="https://youtu.be/3Tpzt6JwtZw">aKaReZa 146 - Microcontroller, Error Detection - PART A</a>
+      </h3>
+      <p style="margin: 8px 0 0;">
+        Learn the fundamentals of <strong>Error Detection</strong> in digital systems and embedded applications. This episode explains how data corruption occurs and explores common error-detection techniques including <strong>Parity Bit</strong>, <strong>Checksum</strong>, and <strong>CRC (Cyclic Redundancy Check)</strong>. You'll compare their strengths, limitations, and real-world use cases, making this an essential introduction to improving data reliability in communication and storage systems.
+      </p>
+    </td>
+    <td width="360" valign="center" style="padding: 0;">
+      <a href="https://youtu.be/3Tpzt6JwtZw">
+        <img src="https://img.youtube.com/vi/3Tpzt6JwtZw/maxresdefault.jpg"
+             width="360"
+             alt="aKaReZa 146 - Microcontroller, Error Detection - PART A Thumbnail"/>
+      </a>
+    </td>
+  </tr>  
+</table>
 
 
 # 💻 How to Use Git and GitHub
